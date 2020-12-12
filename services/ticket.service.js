@@ -6,7 +6,7 @@ const {sendSuccessfulRegisterEmail} = require('../services/sendmail/bookTickets'
 module.exports.createTicket = (req, res, next) => {
     const user = req.user
     const {tripId, seatCodes} = req.body
-
+    console.log(tripId, seatCodes);
     Trip.findById(tripId)
         .then((trip) => {
             if(!trip) return Promise.reject({
@@ -18,7 +18,7 @@ module.exports.createTicket = (req, res, next) => {
                 .filter(seat => !seat.isBooked)
                 .map(seat => seat.code)
 
-            //console.log(availableSeatCodes)
+            console.log(availableSeatCodes)
 
             const errSeatCodes = [] //danh sach ghe loi
             seatCodes.forEach(code => {
@@ -34,6 +34,7 @@ module.exports.createTicket = (req, res, next) => {
             
             seatCodes.forEach(code => {
                 const index = trip.seats.findIndex(seat => seat.code === code)
+                console.log(trip.seats)
                 trip.seats[index].isBooked = true //
             })
 

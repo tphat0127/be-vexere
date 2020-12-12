@@ -12,7 +12,6 @@ module.exports.authenticate = (req, res, next) => {
                 message: "Token is invalid"
             })
             req.user = decoded
-            console.log()
             return next()
         })
         .catch(err => {

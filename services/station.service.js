@@ -101,3 +101,14 @@ module.exports.deleteStation = (req, res, next) => {
         .then(() => res.status(200).json(_station))
         .catch(err => res.status(404).json(err))
 }
+//GET api/stations/get/:province
+module.exports.getStationByProvince = (req, res) => {
+    const {province} = req.params;
+    Station.find({province})
+        .then(stations => {
+            return res.status(200).json(stations)
+        })
+        .catch(err => {
+            return res.status(500).json(err)
+        })
+}

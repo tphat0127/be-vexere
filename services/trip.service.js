@@ -9,6 +9,9 @@ const seatCodeArr = [
 // GET /api/trip
 module.exports.getTrip = (req, res, next) => {
     return Trip.find()
+        .populate('fromStationId')
+        .populate('toStationId')
+        .populate('coachId')
         .then(trips => {
             return res.status(200).json(trips)
         })
@@ -16,12 +19,27 @@ module.exports.getTrip = (req, res, next) => {
             return res.status(500).json(err)
         })
 }
-
+// GET search trip api/trips/:fromStationId/:toStationId
+module.exports.searchTrips = (req, res, next) => {
+    const { fromStationId, toStationId } = req.params;
+    Trip.find({ fromStationId, toStationId })
+        .then((trips) => {
+            if(trips=="") return Promise.reject({
+                status: 404,
+                message: "Trips not found"
+            })
+            return res.status(200).json(trips);
+        })
+        .catch((err) => res.status(404).json(err));
+}
 // GET by id api/trip/:id
 module.exports.getTripById = (req, res, next) => {
     const {tripId} = req.params
 
     Trip.findById(tripId)
+        .populate('fromStationId')
+        .populate('toStationId')
+        .populate('coachId')
         .then(trip => {
             if(!trip) return Promise.reject({
                 status: 404,
@@ -41,8 +59,8 @@ module.exports.createTrip = (req, res, next) => {
             isBooked: "false"
         })
     })
-    const {fromStationId, toStationId, startTime, price} = req.body
-    return Trip.create({fromStationId, toStationId, startTime, price, seats})
+    const {fromStationId, toStationId, coachId, startTime, price} = req.body
+    return Trip.create({fromStationId, toStationId, coachId, startTime, price, seats})
         .then(trip => {
             return res.status(201).json(trip)
         })

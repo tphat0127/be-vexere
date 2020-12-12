@@ -10,6 +10,10 @@ const TripSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Station"
     },
+    coachId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Coach",
+    },
     startTime: {type: Date, },
     seats: [SeatSchema],
     price: {type: Number, default: 0},

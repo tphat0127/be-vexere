@@ -1,4 +1,4 @@
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 
 const envPath = __dirname + `/../.env.${process.env.NODE_ENV}`
 dotenv.config({path: envPath})
