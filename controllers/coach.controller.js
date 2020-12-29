@@ -1,8 +1,9 @@
 const express = require('express');
-const { createCoach, getCoach } = require('./../services/coach.service');
+const { createCoach, getCoach, deleteCoach } = require('./../services/coach.service');
 const router = express.Router()
 
-router.post('/coachs', createCoach);
-router.get('/coachs', getCoach);
+router.post('/coaches', createCoach);
+router.get('/coaches', getCoach);
+router.delete('/coaches/:coachID', deleteCoach);
 
 module.exports = router
