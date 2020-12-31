@@ -7,7 +7,6 @@ const tripController = require('./controllers/trip.controller')
 const userController = require('./controllers/user.controller')
 const ticketController = require('./controllers/ticket.controller')
 const coachController = require('./controllers/coach.controller')
-
 mongoose.connect(config.DB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true

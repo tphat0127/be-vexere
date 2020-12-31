@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
     "start:watch": "nodemon .",
-    "start:local": "export NODE_ENV=local && nodemon .",
-    "start:staging": "export NODE_ENV=staging && nodemon ."
+    "start:local": "set NODE_ENV=local& nodemon .",
+    "start:staging": "set NODE_ENV=staging& nodemon ."
   },
   "author": "",
   "license": "ISC",
