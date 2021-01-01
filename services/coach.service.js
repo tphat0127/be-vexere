@@ -57,7 +57,7 @@ module.exports.replaceCoach = (req, res, next) => {
 
             return coach.save()
         })
-        .then(station => res.status(200).json(coach))
+        .then(coach => res.status(200).json(coach))
         .catch(err => res.status(500).json(err))
        
 }
