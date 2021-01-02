@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     password: {type: String, required: true},
     fullName: {type: String},
     userType: {type: String, required: true, default: "Member"},
-    avatarUrl: {type: String}
+    avatarUrl: {type: String, default: "avatars/default.png"}
 })
 //Design pattern Observer => pbublisher + subcriber
 //=>              ^^ Life cycle hook
