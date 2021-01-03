@@ -78,3 +78,18 @@ module.exports.deleteCoach = (req, res, next) => {
         .then(() => res.status(200).json(_coach))
         .catch(err => res.status(404).json(err))
 }
+//UPLOAD api/coaches/:coachId/upload-thumbnail
+module.exports.updateThumbnail = (req, res, next) => {
+    const {coachId} = req.params;
+    Coach.findById(coachId)
+        .then(coach =>{
+            if(!coach) return Promise.reject({
+                message: "Coach not found"
+            })
+            coach.thumbnail = `${req.file.fieldname}s/${req.file.filename}`
+            console.log(req.file.filename)
+            return coach.save()
+        })
+        .then((coach) => res.status(200).json(coach))
+        .catch(err => res.status(500).json(err))
+}

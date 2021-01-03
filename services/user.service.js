@@ -85,7 +85,7 @@ module.exports.login = (req, res, next) => {
         .then(user => {
             if(!user) return Promise.reject({
                 status: 404,
-                message: "USer not found"
+                message: "User not found"
             })
             _user = user
             return bcrypt.compare(password, user.password) //=> true/false == isMatched
@@ -100,7 +100,8 @@ module.exports.login = (req, res, next) => {
                 _id: _user._id,
                 email: _user.email,
                 userType: _user.userType,
-                fullName: _user.fullName
+                fullName: _user.fullName,
+				avatarUrl: _user.avatarUrl
             }
             return jwtSign(
                 payload,
@@ -121,7 +122,7 @@ module.exports.updatePassword = ( req, res, next) => {
         .then(user => {
             if(!user) return Promise.reject({
                 status: 404,
-                message: "USer not found"
+                message: "User not found"
             })
             
             _user = user
@@ -147,7 +148,7 @@ module.exports.getMe =  (req, res, next) => {
 
 //UPLOAD api/user/upload-avatar
 module.exports.uploadAvatar = (req, res, next) => {
-    //onst { user } = req
+    //const { user } = req
     User.findById(req.user._id)
         .then(user =>{
             if(!user) return Promise.reject({
